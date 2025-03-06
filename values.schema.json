@@ -1,0 +1,276 @@
+{
+    "title": "Chart Values",
+    "type": "object",
+    "properties": {
+        "replicas": {
+            "type": "number",
+            "description": "The number of replica",
+            "default": 1
+        },
+        "nameOverride": {
+            "type": "string",
+            "description": "Custom name",
+            "default": ""
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "description": "The full custom name",
+            "default": ""
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "repository": {
+                    "type": "string",
+                    "description": "The repository name",
+                    "default": "ubuntu/squid"
+                },
+                "pullPolicy": {
+                    "type": "string",
+                    "description": "The image pull policy",
+                    "default": "IfNotPresent"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "The image tag",
+                    "default": "6.10-24.10_edge"
+                }
+            }
+        },
+        "imagePullSecrets": {
+            "type": "array",
+            "description": "The image pull secrets",
+            "default": "[]",
+            "items": {
+                "type": "string"
+            }
+        },
+        "pvc": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Use PVC instead emptyDir for cache data",
+                    "default": true
+                },
+                "labels": {
+                    "type": "object",
+                    "description": "Set labels to PVC",
+                    "default": {}
+                },
+                "annotations": {
+                    "type": "object",
+                    "description": "Set annotations to PVC",
+                    "default": {}
+                },
+                "spec": {
+                    "type": "object",
+                    "description": "The PVC spec",
+                    "default": {}
+                }
+            }
+        },
+        "env": {
+            "type": "object",
+            "description": "Set environment variables to pod",
+            "default": {}
+        },
+        "envFrom": {
+            "type": "array",
+            "description": "set environment variable from secret or configMap",
+            "default": "[]",
+            "items": {
+                "type": "string"
+            }
+        },
+        "secretNameConfig": {
+            "type": "string",
+            "description": "Mount config on pod from secret",
+            "default": ""
+        },
+        "config": {
+            "type": "string",
+            "description": "The squid configs",
+            "default": "httpd_suppress_version_string on\nacl localnet src 0.0.0.1-0.255.255.255\t# RFC 1122 \"this\" network (LAN)\nacl localnet src 10.0.0.0/8\t\t# RFC 1918 local private network (LAN)\nacl localnet src 100.64.0.0/10\t\t# RFC 6598 shared address space (CGN)\nacl localnet src 169.254.0.0/16 \t# RFC 3927 link-local (directly plugged) machines\nacl localnet src 172.16.0.0/12\t\t# RFC 1918 local private network (LAN)\nacl localnet src 192.168.0.0/16\t\t# RFC 1918 local private network (LAN)\nacl localnet src fc00::/7       \t# RFC 4193 local private network range\nacl localnet src fe80::/10      \t# RFC 4291 link-local (directly plugged) machines\nacl SSL_ports port 443\nacl Safe_ports port 80\t\t# http\nacl Safe_ports port 21\t\t# ftp\nacl Safe_ports port 443\t\t# https\nacl Safe_ports port 70\t\t# gopher\nacl Safe_ports port 210\t\t# wais\nacl Safe_ports port 1025-65535\t# unregistered ports\nacl Safe_ports port 280\t\t# http-mgmt\nacl Safe_ports port 488\t\t# gss-http\nacl Safe_ports port 591\t\t# filemaker\nacl Safe_ports port 777\t\t# multiling http\nacl CONNECT method CONNECT\nhttp_access deny !Safe_ports\nhttp_access deny CONNECT !SSL_ports\nhttp_access allow localhost manager\nhttp_access deny manager\nhttp_access allow localhost\nhttp_access allow localnet\nhttp_access deny all\nrefresh_pattern ^ftp:\t\t1440\t20%\t10080\nrefresh_pattern ^gopher:\t1440\t0%\t1440\nrefresh_pattern -i (/cgi-bin/|\\?) 0\t0%\t0\nrefresh_pattern \\/(Packages|Sources)(|\\.bz2|\\.gz|\\.xz)$ 0 0% 0 refresh-ims\nrefresh_pattern \\/Release(|\\.gpg)$ 0 0% 0 refresh-ims\nrefresh_pattern \\/InRelease$ 0 0% 0 refresh-ims\nrefresh_pattern \\/(Translation-.*)(|\\.bz2|\\.gz|\\.xz)$ 0 0% 0 refresh-ims\nrefresh_pattern .\t\t0\t20%\t4320\nlogfile_rotate 0\n"
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean",
+                    "description": "Specifies whether a service account should be created",
+                    "default": true
+                },
+                "annotations": {
+                    "type": "object",
+                    "description": "Annotations to add to the service account",
+                    "default": {}
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the service account to use.",
+                    "default": ""
+                }
+            }
+        },
+        "podAnnotations": {
+            "type": "object",
+            "description": "The pod annotation",
+            "default": {}
+        },
+        "service": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "The service type",
+                    "default": "ClusterIP"
+                },
+                "port": {
+                    "type": "number",
+                    "description": "The service port",
+                    "default": 3128
+                }
+            }
+        },
+        "ingress": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Set true to enable ingress",
+                    "default": false
+                },
+                "className": {
+                    "type": "string",
+                    "description": "The class name to use",
+                    "default": ""
+                },
+                "annotations": {
+                    "type": "object",
+                    "description": "The ingress annotations",
+                    "default": {}
+                },
+                "hosts": {
+                    "type": "array",
+                    "description": "The hostname",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "host": {
+                                "type": "string",
+                                "description": "The hostname"
+                            },
+                            "paths": {
+                                "type": "array",
+                                "description": "the path",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "path": {
+                                            "type": "string",
+                                            "description": "the path"
+                                        },
+                                        "pathType": {
+                                            "type": "string",
+                                            "description": "The path type"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tls": {
+                    "type": "array",
+                    "description": "The hosts over TLS",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "hosts": {
+                                "type": "array",
+                                "description": "The hosts over TLS",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "autoscaling": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Set true to enable HPA",
+                    "default": false
+                },
+                "minReplicas": {
+                    "type": "number",
+                    "description": "The min replicas",
+                    "default": 1
+                },
+                "maxReplicas": {
+                    "type": "number",
+                    "description": "The max replicas",
+                    "default": 3
+                },
+                "targetCPUUtilizationPercentage": {
+                    "type": "number",
+                    "description": "The treshold base on CPU",
+                    "default": 80
+                },
+                "targetMemoryUtilizationPercentage": {
+                    "type": "number",
+                    "description": "The treshold base on Memory",
+                    "default": 0
+                }
+            }
+        },
+        "nodeSelector": {
+            "type": "object",
+            "description": "The node selector",
+            "default": {}
+        },
+        "tolerations": {
+            "type": "array",
+            "description": "The toleration",
+            "default": "[]",
+            "items": {
+                "type": "string"
+            }
+        },
+        "affinity": {
+            "type": "object",
+            "description": "The affinity",
+            "default": {}
+        },
+        "priorityClassName": {
+            "type": "string",
+            "description": "the priority class name",
+            "default": ""
+        },
+        "terminationGracePeriodSeconds": {
+            "type": "number",
+            "description": "The termintation grace periode",
+            "default": 60
+        },
+        "networkPolicy": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Set true to enable the networkPolicy",
+                    "default": true
+                },
+                "namespaceSelector": {
+                    "type": "object",
+                    "description": "The source namespace selector allowed to access on ",
+                    "default": {}
+                }
+            }
+        }
+    }
+}

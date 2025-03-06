@@ -21,6 +21,7 @@ jobs:
         uses: dagger/dagger-for-github@v7
         with:
           version: "0.16.1"
+          cloud-token: ${{ secrets.DAGGER_CLOUD_TOKEN }}
           verb: call
           module: github.com/disaster37/dagger-library-go/helm@v2
           args: --src . ci --ci github --version ${VERSION} --registry ghcr.io --repository ${{ github.repository }} --git-repo-url ${{ github.repositoryUrl }} --git-branch ${BRANCH_NAME} --git-token env:GITHUB_TOKEN --registry-username env:REGISTRY_USERNAME --registry-password env:REGISTRY_PASSWORD

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "helmproj.fullname" . }}-config
+data:
+  squid.conf: |-
+    {{ .Values.config | nindent 4 }}
+    coredump_dir /var/spool/squid
+    cache_dir /var/spool/squid
+    http_port 3128
+    include /etc/squid/conf.d/*
+    

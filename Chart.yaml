@@ -1,0 +1,14 @@
+apiVersion: v2
+name: squid
+version: 1.0.2
+appVersion: 6.10-24.10_edge
+home: https://www.squid-cache.org/
+description: |
+  Squid Web Proxy Cache
+icon: https://avatars.githubusercontent.com/u/363029?s=48&v=4
+keywords:
+  - squid
+  - proxy
+sources:
+  - https://github.com/squid-cache/squid
+type: application

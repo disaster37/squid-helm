@@ -1,0 +1,31 @@
+name: "build"
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "*"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Call Dagger Function
+        uses: dagger/dagger-for-github@v7
+        with:
+          version: "0.16.1"
+          verb: call
+          module: github.com/disaster37/dagger-library-go/helm@v2
+          args: --src . ci --ci github --version ${VERSION} --registry ghcr.io --repository ${{ github.repository }} --git-repo-url ${{ github.repositoryUrl }} --git-branch --git-token env:GITHUB_TOKEN --registry-username env:REGISTRY_USERNAME --registry-password env:REGISTRY_PASSWORD
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REGISTRY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          REGISTRY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+          VERSION: ${{ github.ref_type == 'tag' && github.ref_name || github.event_name == 'pull_request' && format('0.0.0.pr.{0}.{1}', github.event.number github.run.number) || format('rc.{0}', github.run_number) }}

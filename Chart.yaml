@@ -1,6 +1,6 @@
 apiVersion: v2
 name: squid
-version: 0.0.0-rc.9
+version: 0.0.0-rc.1
 appVersion: 6.10-24.10_edge
 home: https://www.squid-cache.org/
 description: |

@@ -1,5 +1,7 @@
 name: "dagger"
 on:
+  release:
+    types: [created, published]
   push:
     branches:
       - main

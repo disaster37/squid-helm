@@ -51,7 +51,6 @@ spec:
           {{- with .Values.envFrom }}
           envFrom: {{ toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.securityContext }}
           securityContext:
             capabilities:
               drop:
@@ -63,8 +62,9 @@ spec:
                 - NET_RAW
                 - DAC_OVERRIDE
                 - KILL
-          {{ toYaml . | nindent 12 }}
-          {{- end }}
+            {{- with .Values.securityContext }}
+            {{ toYaml . | nindent 12 }}
+            {{- end }}
           {{- with .Values.resources }}
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}

@@ -73,6 +73,9 @@ spec:
             {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       volumes:
+        - name: config
+          configMap:
+            name: {{ template "helmproj.fullname" . }}-config
         {{- if not .Values.pvc.enabled }}
         - name: data
           emptyDir: {}

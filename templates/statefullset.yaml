@@ -39,7 +39,7 @@ spec:
       {{- end }}
       containers:
         - name: squid
-          image: '{{ .Values.image }}:{{ .Values.image.tag }}'
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 3128

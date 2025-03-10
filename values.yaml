@@ -92,10 +92,7 @@ serviceAccount:
 podAnnotations: {}
 
 ## @param  securityContext [object] The pod security context
-securityContext:
-   capabilities:
-     drop:
-     - ALL
+securityContext: {}
 
 service:
   ## @param service.type The service type

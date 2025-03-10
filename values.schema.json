@@ -255,7 +255,7 @@
         "terminationGracePeriodSeconds": {
             "type": "number",
             "description": "The termintation grace periode",
-            "default": 60
+            "default": 30
         },
         "networkPolicy": {
             "type": "object",

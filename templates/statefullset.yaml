@@ -58,9 +58,10 @@ spec:
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}
           readinessProbe:
-             httpGet:
-               path: /
-               port: squid
+            tcpSocket:
+              port: squid
+            initialDelaySeconds: 30
+            periodSeconds: 30
           volumeMounts:
             - name: data
               mountPath: /var/spool/squid

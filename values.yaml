@@ -161,7 +161,7 @@ affinity: {}
 priorityClassName: ""
 
 ## @param terminationGracePeriodSeconds The termintation grace periode
-terminationGracePeriodSeconds: 60
+terminationGracePeriodSeconds: 30
 
 networkPolicy:
   ## @param networkPolicy.enabled Set true to enable the networkPolicy

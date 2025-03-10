@@ -59,6 +59,10 @@ spec:
               add:
                 - SETUID
                 - SETGID
+                - CHOWN
+                - NET_RAW
+                - DAC_OVERRIDE
+                - KILL
           {{ toYaml . | nindent 12 }}
           {{- end }}
           {{- with .Values.resources }}

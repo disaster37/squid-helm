@@ -96,8 +96,6 @@ securityContext:
    capabilities:
      drop:
      - ALL
-   runAsNonRoot: true
-   runAsUser: 1000
 
 service:
   ## @param service.type The service type

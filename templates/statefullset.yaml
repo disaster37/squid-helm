@@ -83,7 +83,7 @@ spec:
         {{- if .Values.secretNameConfig }}
         - name: secret-config
           secret:
-            secretName: .Values.secretNameConfig
+            secretName: {{ .Values.secretNameConfig }}
         {{- end }}
   {{- if .Values.pvc.enabled }}
   volumeClaimTemplates:

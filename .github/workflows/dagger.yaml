@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Call Dagger Function
-        uses: dagger/dagger-for-github@v8
+        uses: dagger/dagger-for-github@v8.4.1
         with:
           version: "latest"
           cloud-token: ${{ secrets.DAGGER_CLOUD_TOKEN }}

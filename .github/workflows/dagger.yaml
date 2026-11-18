@@ -21,8 +21,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Call Dagger Function
-        uses: dagger/dagger-for-github@v7
+        uses: dagger/dagger-for-github@v8
         with:
+          version: "latest"
           cloud-token: ${{ secrets.DAGGER_CLOUD_TOKEN }}
           verb: call
           module: github.com/disaster37/dagger-library-go/helm@2.0.13

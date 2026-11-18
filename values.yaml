@@ -13,7 +13,7 @@ image:
   ## @param image.pullPolicy The image pull policy
   pullPolicy: IfNotPresent
   ## @param image.tag The image tag
-  tag: "6.10-24.10_edge"
+  tag: "7.2-26.04_edge"
 
 ## @param imagePullSecrets [array] The image pull secrets
 imagePullSecrets: []
@@ -121,6 +121,15 @@ ingress:
     - hosts: 
        - chart-example.local
 
+route:
+  ## @param route.enabled Set true to enable route
+  enabled: false
+  ## @param route.annotations The route annotations
+  annotations: {}
+  ## @param route.host The hostname
+  host: ""
+  ## @param route.tls The tls settings
+  tls: {}
 
 
 ## @param resources [object] The resources
@@ -165,3 +174,6 @@ networkPolicy:
   enabled: true
   ## @param networkPolicy.namespaceSelector The source namespace selector allowed to access on 
   namespaceSelector: {}
+
+## @param isOpenshift Set true if the cluster is Openshift
+isOpenshift: false

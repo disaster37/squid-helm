@@ -25,11 +25,13 @@ spec:
       {{- with .Values.affinity }}
       affinity: {{ toYaml . | nindent 8 }}
       {{- end }}
+      {{- if not .Values.isOpenshift }}
       securityContext:
-        runAsUser: 0
-        runAsGroup: 0
-        fsGroup: 0
+        runAsUser: 584792
+        runAsGroup: 584792
+        fsGroup: 584792
         fsGroupChangePolicy: "OnRootMismatch"
+      {{- end }}
       serviceAccountName: {{ include "helmproj.serviceAccountName" . }}
       {{- with .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}

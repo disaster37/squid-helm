@@ -27,6 +27,8 @@ spec:
       {{- end }}
       {{- if not .Values.isOpenshift }}
       securityContext:
+        runAsNonRoot: true
+
         runAsUser: 584792
         runAsGroup: 584792
         fsGroup: 584792
@@ -54,16 +56,11 @@ spec:
           envFrom: {{ toYaml . | nindent 12 }}
           {{- end }}
           securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
             capabilities:
               drop:
                 - ALL
-              add:
-                - SETUID
-                - SETGID
-                - CHOWN
-                - NET_RAW
-                - DAC_OVERRIDE
-                - KILL
             {{- with .Values.securityContext }}
             {{ toYaml . | nindent 12 }}
             {{- end }}

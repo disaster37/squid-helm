@@ -28,7 +28,6 @@ spec:
       {{- if not .Values.isOpenshift }}
       securityContext:
         runAsNonRoot: true
-
         runAsUser: 584792
         runAsGroup: 584792
         fsGroup: 584792
@@ -73,6 +72,8 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 30
           volumeMounts:
+            - name: squid-run
+              mountPath: /run
             - name: data
               mountPath: /var/spool/squid
             - name: config
@@ -84,6 +85,8 @@ spec:
             {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       volumes:
+        - name: squid-run
+          emptyDir: {}
         - name: config
           configMap:
             name: {{ template "helmproj.fullname" . }}-config

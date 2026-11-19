@@ -102,3 +102,5 @@ logfile_rotate 0
 | `networkPolicy.enabled` | Set true to enable the networkPolicy | `true` |
 | `networkPolicy.namespaceSelector` | The source namespace selector allowed to access on | `{}` |
 | `isOpenshift` | Set true if the cluster is Openshift | `false` |
+
+| `isOpenshift` | Set true if the cluster is Openshift | `false` |

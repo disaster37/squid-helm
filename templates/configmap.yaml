@@ -7,5 +7,8 @@ data:
     {{ .Values.config | nindent 4 }}
     coredump_dir /var/spool/squid
     http_port 3128
+    pinger_enable off
+    access_log stdio:/dev/stdout squid
+    cache_log stdio:/dev/stdout
     include /etc/squid/conf.d/*
     

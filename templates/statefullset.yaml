@@ -74,6 +74,8 @@ spec:
           volumeMounts:
             - name: squid-run
               mountPath: /run
+            - name: squid-log
+              mountPath: /var/log/squid
             - name: data
               mountPath: /var/spool/squid
             - name: config
@@ -86,6 +88,8 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       volumes:
         - name: squid-run
+          emptyDir: {}
+        - name: squid-log
           emptyDir: {}
         - name: config
           configMap:

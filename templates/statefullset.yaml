@@ -73,8 +73,13 @@ spec:
           resources: {{- toYaml . | nindent 12 }}
           {{- end }}
           readinessProbe:
-            tcpSocket:
-              port: squid
+            exec:
+              command:
+                - /usr/sbin/squid-gnutls
+                - -f
+                - /etc/squid/squid.conf
+                - -k
+                - check
             initialDelaySeconds: 30
             periodSeconds: 30
           volumeMounts:

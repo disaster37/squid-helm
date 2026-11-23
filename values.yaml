@@ -34,6 +34,19 @@ env: {}
 ## @param envFrom [array] set environment variable from secret or configMap
 envFrom: []
 
+## @param command Override the container command
+## Run the image entrypoint directly instead of the image ENTRYPOINT (Pebble on
+## the v7 rock image), so that the entrypoint's log forwarding (tail of
+## /var/log/squid/*.log) goes to the pod stdout and is visible with kubectl logs.
+command:
+  - /usr/local/bin/entrypoint.sh
+
+## @param args Arguments passed to the container command
+args:
+  - -f
+  - /etc/squid/squid.conf
+  - -NYC
+
 ## @param secretNameConfig Mount config on pod from secret
 secretNameConfig: ""
 

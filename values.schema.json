@@ -7,6 +7,28 @@
             "description": "The affinity",
             "default": {}
         },
+        "args": {
+            "type": "array",
+            "description": "Arguments passed to the container command",
+            "default": [
+                "-f",
+                "/etc/squid/squid.conf",
+                "-NYC"
+            ],
+            "items": {
+                "type": "string"
+            }
+        },
+        "command": {
+            "type": "array",
+            "description": "Override the container command",
+            "default": [
+                "/usr/local/bin/entrypoint.sh"
+            ],
+            "items": {
+                "type": "string"
+            }
+        },
         "autoscaling": {
             "type": "object",
             "properties": {

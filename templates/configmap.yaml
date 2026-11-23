@@ -8,8 +8,5 @@ data:
     coredump_dir /var/spool/squid
     http_port 3128
     pinger_enable off
-    access_log /var/log/squid/access.log squid
-    cache_store_log /var/log/squid/store.log
-    cache_log /var/log/squid/cache.log
     include /etc/squid/conf.d/*.conf
     

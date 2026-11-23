@@ -30,6 +30,8 @@ helm repo update
 | `pvc.spec` | The PVC spec | `{}` |
 | `env` | Set environment variables to pod | `{}` |
 | `envFrom` | set environment variable from secret or configMap | `[]` |
+| `command` | Override the container command | `[/usr/local/bin/entrypoint.sh]` |
+| `args` | Arguments passed to the container command | `[-f /etc/squid/squid.conf -NYC]` |
 | `secretNameConfig` | Mount config on pod from secret | `` |
 | `config` | The squid configs | `httpd_suppress_version_string on
 acl localnet src 0.0.0.1-0.255.255.255	# RFC 1122 "this" network (LAN)

@@ -15,19 +15,7 @@
                 "/etc/squid/squid.conf",
                 "-NYC"
             ],
-            "items": {
-                "type": "string"
-            }
-        },
-        "command": {
-            "type": "array",
-            "description": "Override the container command",
-            "default": [
-                "/usr/local/bin/entrypoint.sh"
-            ],
-            "items": {
-                "type": "string"
-            }
+            "items": {}
         },
         "autoscaling": {
             "type": "object",
@@ -58,6 +46,14 @@
                     "default": 0
                 }
             }
+        },
+        "command": {
+            "type": "array",
+            "description": "Override the container command",
+            "default": [
+                "/usr/local/bin/entrypoint.sh"
+            ],
+            "items": {}
         },
         "config": {
             "type": "string",
